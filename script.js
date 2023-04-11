@@ -23,22 +23,27 @@ $(function () {
 });
 
 
-var containerEl
-var hourlyBlock
-var saveButton
-var userInput
-
 //current day is displayed at the top of the calendar
-var todaysDate = dayjs('2023-04-10').format('MMM D, YYYY');
+var todaysDate = dayjs().format('MMM D, YYYY');
 $("#currentDay").text(todaysDate);
 console.log(todaysDate);
 
 //timeblocks for standard business hours
-var currentHour = dayjs().format("hh");
-console.log(currentHour)
+var currentHour = dayjs().format("h");
+console.log(currentHour);
 
 //each timeblock is color coded to indicate whether it is in the past, present, or future
 /*add & remove class here*/
+// step 1: grab HTML elements
+var timeBlocks = $(".time-block")
+//console.log(timeBlocks)
+
+
+timeBlocks.each(function(timeblock) {
+  var hour = $(this).attr("id").split("-")[1]
+  console.log(parseInt(currentHour)>parseInt(hour))
+});
+
 
 //timeblock clickable, enter text
 function handleFormSubmit(event) {
@@ -52,7 +57,4 @@ function renderLastRegistered() {
 var userInput = localStorage.getItem ("");
 console.log(localStorage);
 }
-
-
-
 
