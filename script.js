@@ -33,10 +33,12 @@ var currentHour = dayjs().format("h");
 console.log(currentHour);
 
 //each timeblock is color coded to indicate whether it is in the past, present, or future
+
 /*add & remove class here*/
+
 // step 1: grab HTML elements
 var timeBlocks = $(".time-block")
-//console.log(timeBlocks)
+console.log(timeBlocks)
 
 
 timeBlocks.each(function(timeblock) {
@@ -44,11 +46,28 @@ timeBlocks.each(function(timeblock) {
   console.log(parseInt(currentHour)>parseInt(hour))
 });
 
+/* var anotherHour =
+console.log(anotherHour) */
+
+if(currentHour) {
+  $(timeBlocks).addClass("present").css("background-color", "red")
+  console.log("Present")
+
+/*} else if (currentHour > anotherHour){
+  $(timeBlocks).addClass("past").css("background-color", "grey")
+  console.log("Past")*/
+
+} else $(timeBlocks).addClass("future").css("background-color", "green")
+console.log("Future")
+
 
 //timeblock clickable, enter text
+
+var saveButton = $(".saveBtn")
+
 function handleFormSubmit(event) {
   event.preventDefault();}
-/*saveButton.on("click", handleFormSubmit);*/
+saveButton.on("click", handleFormSubmit);
 
 //save to store in local storage
 renderLastRegistered();
@@ -57,4 +76,3 @@ function renderLastRegistered() {
 var userInput = localStorage.getItem ("");
 console.log(localStorage);
 }
-
