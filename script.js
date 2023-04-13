@@ -29,7 +29,11 @@ $("#currentDay").text(todaysDate);
 console.log(todaysDate);
 
 //timeblocks for standard business hours
-var currentHour = dayjs().format("h");
+
+var now = new Date();
+var currentHour = now.getHours();
+//var currentHour = 13
+
 console.log(currentHour);
 
 //each timeblock is color coded to indicate whether it is in the past, present, or future
@@ -43,36 +47,23 @@ console.log(timeBlocks)
 
 timeBlocks.each(function(timeblock) {
   var hour = $(this).attr("id").split("-")[1]
-  console.log(parseInt(currentHour)>parseInt(hour))
+  //console.log(parseInt(currentHour)>parseInt(hour))
+  if(currentHour > hour){
+    $(this).addClass("past")
+    $(this).removeClass("present", "future")
+  }
+  if(currentHour < hour){
+    $(this).addClass("future")
+    $(this).removeClass("present", "past")
+  }
+  if(currentHour == hour){
+    $(this).addClass("present")
+    $(this).removeClass("past", "future")
+
+  }
 });
 
-/* var anotherHour =
-console.log(anotherHour) */
-
-if(currentHour) {
-  $(timeBlocks).addClass("present").css("background-color", "red")
-  console.log("Present")
-
-/*} else if (currentHour > anotherHour){
-  $(timeBlocks).addClass("past").css("background-color", "grey")
-  console.log("Past")*/
-
-} else $(timeBlocks).addClass("future").css("background-color", "green")
-console.log("Future")
-
-
-//timeblock clickable, enter text
-
 var saveButton = $(".saveBtn")
-
-function handleFormSubmit(event) {
-  event.preventDefault();}
-saveButton.on("click", handleFormSubmit);
-
-//save to store in local storage
-renderLastRegistered();
-
-function renderLastRegistered() {
-var userInput = localStorage.getItem ("");
-console.log(localStorage);
-}
+saveButton.click(function(){
+  var userInput = localStorage.setItem ("")
+})
