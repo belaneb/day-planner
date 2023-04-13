@@ -62,8 +62,17 @@ timeBlocks.each(function(timeblock) {
 
   }
 });
+var userInput = $("<textarea>")
+console.log(userInput)
+
+localStorage.setItem(userInput, "userInput")
+console.log(userInput)
+
+localStorage.getItem(userInput, "userInput")
+console.log(localStorage)
 
 var saveButton = $(".saveBtn")
 saveButton.click(function(){
-  var userInput = localStorage.setItem ("")
+  console.log(saveButton)
 })
+
