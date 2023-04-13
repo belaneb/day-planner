@@ -35,12 +35,30 @@ timeBlocks.each(function(timeblock) {
   }
 });
 
-var userInput = $("<textarea>")
-console.log(userInput)
+function save(e){
+  var text = $(e.target).siblings('textarea').val()
+  var hour = $(e.target).parent().attr("id").split("-")[1]
+  var obj = { text: text, hour: hour}
+  savedUserInput.forEach((savedObject, index) => {
+    if (savedObject.hour === obj.hour) {
+      savedUserInput[index] = obj
+    }
+  })
+  localStorage.setItem("userInput", JSON.stringify(savedUserInput))
+}
 
-localStorage.setItem("userInput", JSON.stringify(userInput))
+
 var savedUserInput = JSON.parse(localStorage.getItem("userInput"))
+if (!savedUserInput) {
+  savedUserInput = []
+  timeBlocks.each(function(timeblock) {
+    savedUserInput.push({
+      text: '',
+      hour: $(this).attr("id").split("-")[1]
+    })
+  })
+  localStorage.setItem("userInput", JSON.stringify(savedUserInput))
+}
 
 var saveButton = $(".saveBtn")
-saveButton.click(function(){
-})
+saveButton.click(save)
